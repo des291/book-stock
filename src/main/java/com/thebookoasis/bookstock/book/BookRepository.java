@@ -2,6 +2,7 @@ package com.thebookoasis.bookstock.book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +17,25 @@ public class BookRepository {
         return books;
     }
 
-    Book findById(int id) {
+    Optional<Book> findById(int id) {
         return books.stream()
                 .filter(book -> book.getId() == id)
-                .findFirst()
-                .get();
+                .findFirst();
+    }
+
+    void create(Book book) {
+        books.add(book);
+    }
+
+    void update(Book book, Integer id) {
+        Optional<Book> existingBook = findById(id);
+        if (existingBook.isPresent()) {
+            books.set(books.indexOf(existingBook.get()), book);
+        }
+    }
+
+    void delete(Integer id) {
+        books.removeIf(book -> book.getId().equals(id));
     }
 
     @PostConstruct

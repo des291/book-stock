@@ -1,10 +1,18 @@
 package com.thebookoasis.bookstock.book;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class Book {
+    @NotNull
     private Integer id;
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String author;
+    @NotEmpty
     private Integer pubYear;
+    @NotEmpty
     private String genre;
 
     public Book(Integer id, String title, String author, Integer pubYear, String genre) {
