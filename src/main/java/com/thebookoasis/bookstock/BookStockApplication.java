@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.thebookoasis.bookstock.book.Book;
+import com.thebookoasis.bookstock.book.BookRepository;
 
 @SpringBootApplication
 public class BookStockApplication {
@@ -19,10 +20,19 @@ public class BookStockApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner() {
+	CommandLineRunner runner(BookRepository bookRepository) {
 		return args -> {
-			Book book = new Book(1, "Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
-			log.info("Book: " + book);
+			if (bookRepository.count() == 0) {
+				Book book = new Book(1, "Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
+				log.info("Book: " + book);
+				bookRepository.create(book);
+				Book book2 = new Book(2, "The Shining", "Stephen King", 1980, "Horror");
+				bookRepository.create(book2);
+				Book book3 = new Book(3, "Cash", "Johnny Cash", 2003, "Autobiography");
+				bookRepository.create(book3);
+			} else {
+				log.info("Not adding books as data already present");
+			}
 		};
 	}
 }
