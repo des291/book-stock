@@ -22,7 +22,7 @@ public class BookStockApplication {
 	@Bean
 	CommandLineRunner runner(BookRepository bookRepository) {
 		return args -> {
-			if (bookRepository.count() == 0) {
+			if (bookRepository.countBooks() == 0) {
 				Book book = new Book(1, "Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
 				log.info("Book: " + book);
 				bookRepository.create(book);

@@ -64,13 +64,26 @@ public class BookRepository {
         Assert.state(updated == 1, "Failed to delete book " + id);
     }
 
-    public int count() {
+    public int countBooks() {
         return jdbcClient.sql("SELECT * FROM Books")
                 .query()
                 .listOfRows()
                 .size();
     }
 
+    public int countAuthors() {
+        return jdbcClient.sql("SELECT DISTINCT author FROM Books")
+                .query()
+                .listOfRows()
+                .size();
+    }
+
+    public int countGenres() {
+        return jdbcClient.sql("SELECT DISTINCT genre FROM Books")
+                .query()
+                .listOfRows()
+                .size();
+    }
     // @PostConstruct
     // private void init() {
     // books.add(new Book(1, "Klara and the Sun", "Kazuo Ishiguro", 2021, "Science
