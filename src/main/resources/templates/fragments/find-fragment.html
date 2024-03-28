@@ -1,0 +1,89 @@
+<div class="col-sm-10">
+    <h1>Find a book</h1>
+    <form action="#" th:action="@{/create}" th:object="${book}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" th:field="*{title}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" th:field="*{author}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="year-published" class="form-label">Year Published</label>
+            <input type="number" th:field="*{pubYear}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text" th:field="*{genre}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-3">
+        <div class="col-12">
+            <label class="visually-hidden" for="id">ID</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="ID">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </form>
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-3">
+        <div class="col-12">
+            <label class="visually-hidden" for="title">Title</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Title">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </form>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-3">
+        <div class="col-12">
+            <label class="visually-hidden" for="author">Author</label>
+            <div class="input-group">
+                <!-- <div class="input-group-text">@</div> -->
+                <input type="text" class="form-control" placeholder="Author">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </form>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-3">
+        <div class="col-12">
+            <label class="visually-hidden" for="year-published">Year Published</label>
+            <div class="input-group">
+                <!-- <div class="input-group-text">@</div> -->
+                <input type="text" class="form-control" placeholder="Yeah Published">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </form>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center mb-3">
+        <div class="col-12">
+            <label class="visually-hidden" for="genre">Genre</label>
+            <div class="input-group">
+                <!-- <div class="input-group-text">@</div> -->
+                <input type="text" class="form-control" placeholder="Genre">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+        </div>
+    </form>
+</div>

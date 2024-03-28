@@ -3,6 +3,7 @@ package com.thebookoasis.bookstock.frontend;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.thebookoasis.bookstock.book.Book;
 import com.thebookoasis.bookstock.book.BookController;
@@ -43,14 +44,21 @@ public class FrontEndController {
     }
 
     @GetMapping("/create")
-    public String createBook(Model model) {
+    public String bookForm(Model model) {
+        model.addAttribute("book", new Book());
         return "create";
     }
 
     @PostMapping("/create")
-    public String postBook(@RequestBody String entity) {
-
-        return entity;
+    public String postBook(@ModelAttribute Book book, Model model) {
+        model.addAttribute("book", book);
+        bookRepository.create(book);
+        return "create-result";
     }
 
+    @GetMapping("/find")
+    public String findForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "find";
+    }
 }

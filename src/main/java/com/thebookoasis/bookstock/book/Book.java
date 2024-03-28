@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class Book {
-    @NotNull
     private Integer id;
     @NotEmpty
     private String title;
@@ -14,6 +13,17 @@ public class Book {
     private Integer pubYear;
     @NotEmpty
     private String genre;
+
+    public Book() {
+        this.pubYear = 0;
+    };
+
+    public Book(String title, String author, Integer pubYear, String genre) {
+        this.title = title;
+        this.author = author;
+        this.pubYear = pubYear;
+        this.genre = genre;
+    }
 
     public Book(Integer id, String title, String author, Integer pubYear, String genre) {
         this.id = id;

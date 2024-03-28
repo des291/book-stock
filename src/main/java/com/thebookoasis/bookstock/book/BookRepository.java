@@ -39,9 +39,20 @@ public class BookRepository {
                 .optional();
     }
 
+    // public void create(Book book) {
+    // var updated = jdbcClient.sql("INSERT INTO Books(id, title, author, pub_year,
+    // genre) values(?,?,?,?,?)")
+    // .params(List.of(book.getId(), book.getTitle(), book.getAuthor(),
+    // book.getPubYear(),
+    // book.getGenre().toString()))
+    // .update();
+
+    // Assert.state(updated == 1, "Failed to create book " + book.getTitle());
+    // }
+
     public void create(Book book) {
-        var updated = jdbcClient.sql("INSERT INTO Books(id, title, author, pub_year, genre) values(?,?,?,?,?)")
-                .params(List.of(book.getId(), book.getTitle(), book.getAuthor(), book.getPubYear(),
+        var updated = jdbcClient.sql("INSERT INTO Books(title, author, pub_year, genre) values(?,?,?,?)")
+                .params(List.of(book.getTitle(), book.getAuthor(), book.getPubYear(),
                         book.getGenre().toString()))
                 .update();
 

@@ -1,21 +1,21 @@
 <div class="col-sm-10">
     <h1>Create new book</h1>
-    <form method="post">
+    <form action="#" th:action="@{/create}" th:object="${book}" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control">
+            <input type="text" th:field="*{title}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="author" class="form-label">Author</label>
-            <input type="text" class="form-control">
+            <input type="text" th:field="*{author}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="year-published" class="form-label">Year Published</label>
-            <input type="number" class="form-control">
+            <input type="number" th:field="*{pubYear}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="genre" class="form-label">Genre</label>
-            <input type="text" class="form-control">
+            <input type="text" th:field="*{genre}" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

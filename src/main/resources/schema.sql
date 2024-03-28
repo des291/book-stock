@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Books (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     title varchar(250) NOT NULL,
     author varchar(250) NOT NULL,
     pub_year INT NOT NULL,

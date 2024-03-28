@@ -23,12 +23,12 @@ public class BookStockApplication {
 	CommandLineRunner runner(BookRepository bookRepository) {
 		return args -> {
 			if (bookRepository.countBooks() == 0) {
-				Book book = new Book(1, "Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
+				Book book = new Book("Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
 				log.info("Book: " + book);
 				bookRepository.create(book);
-				Book book2 = new Book(2, "The Shining", "Stephen King", 1980, "Horror");
+				Book book2 = new Book("The Shining", "Stephen King", 1980, "Horror");
 				bookRepository.create(book2);
-				Book book3 = new Book(3, "Cash", "Johnny Cash", 2003, "Autobiography");
+				Book book3 = new Book("Cash", "Johnny Cash", 2003, "Autobiography");
 				bookRepository.create(book3);
 			} else {
 				log.info("Not adding books as data already present");
