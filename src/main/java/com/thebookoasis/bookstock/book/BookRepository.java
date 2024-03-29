@@ -1,6 +1,7 @@
 package com.thebookoasis.bookstock.book;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,18 +33,40 @@ public class BookRepository {
                 .list();
     }
 
-    public Optional<Book> findById(Integer id) {
+    public Optional<Book> findById(int id) {
         return jdbcClient.sql("SELECT * FROM Books WHERE id = :id")
                 .param("id", id)
                 .query(Book.class)
                 .optional();
     }
 
-    public Optional<Book> findByTitle(String title) {
+    public List<Book> findByTitle(String title) {
         return jdbcClient.sql("SELECT * FROM Books WHERE title = :title")
                 .param("title", title)
                 .query(Book.class)
-                .optional();
+                .list();
+    }
+
+    public List<Book> findByAuthor(String author) {
+        return jdbcClient.sql("SELECT * FROM Books WHERE author = :author")
+                .param("author", author)
+                .query(Book.class)
+                .list();
+    }
+
+    public List<Book> findByGenre(String genre) {
+        return jdbcClient.sql("SELECT * FROM Books WHERE genre = :genre")
+                .param("genre", genre)
+                .query(Book.class)
+                .list();
+    }
+
+    public List<Book> findByPublishedYear(int publishedYear) {
+        return jdbcClient.sql("SELECT * FROM Books WHERE published_year = :publishedYear")
+                .param("publishedYear",
+                        publishedYear)
+                .query(Book.class)
+                .list();
     }
 
     // public void create(Book book) {
@@ -58,23 +81,25 @@ public class BookRepository {
     // }
 
     public void create(Book book) {
-        var updated = jdbcClient.sql("INSERT INTO Books(title, author, pub_year, genre) values(?,?,?,?)")
-                .params(List.of(book.getTitle(), book.getAuthor(), book.getPubYear(),
+        var updated = jdbcClient.sql("INSERT INTO Books(title, author, published_year, genre) values(?,?,?,?)")
+                .params(List.of(book.getTitle(), book.getAuthor(), book.getPublishedYear(),
                         book.getGenre().toString()))
                 .update();
-
+        log.info(String.valueOf(book.getPublishedYear()));
         Assert.state(updated == 1, "Failed to create book " + book.getTitle());
     }
 
-    public void update(Book book, Integer id) {
-        var updated = jdbcClient.sql("UPDATE Books SET title = ?, author = ?, pub_year = ?, genre = ? WHERE id = ?")
-                .params(List.of(book.getTitle(), book.getAuthor(), book.getPubYear(), book.getGenre().toString(), id))
+    public void update(Book book, int id) {
+        var updated = jdbcClient
+                .sql("UPDATE Books SET title = ?, author = ?, published_year = ?, genre = ? WHERE id = ?")
+                .params(List.of(book.getTitle(), book.getAuthor(), book.getPublishedYear(), book.getGenre().toString(),
+                        id))
                 .update();
 
         Assert.state(updated == 1, "Failed to update book " + book.getTitle());
     }
 
-    public void delete(Integer id) {
+    public void delete(int id) {
         var updated = jdbcClient.sql("DELETE FROM Books WHERE id = :id")
                 .param("id", id)
                 .update();

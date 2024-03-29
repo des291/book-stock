@@ -36,7 +36,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    Book findById(@PathVariable Integer id) {
+    Book findById(@PathVariable int id) {
 
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
@@ -55,14 +55,14 @@ public class BookController {
     // put
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    void update(@Valid @RequestBody Book book, @PathVariable Integer id) {
+    void update(@Valid @RequestBody Book book, @PathVariable int id) {
         bookRepository.update(book, id);
     }
 
     // delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id) {
+    void delete(@PathVariable int id) {
         bookRepository.delete(id);
     }
 

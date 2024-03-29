@@ -24,7 +24,7 @@ public class BookStockApplication {
 		return args -> {
 			if (bookRepository.countBooks() == 0) {
 				Book book = new Book("Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
-				log.info("Book: " + book);
+				log.info("Book: " + book.getPublishedYear());
 				bookRepository.create(book);
 				Book book2 = new Book("The Shining", "Stephen King", 1980, "Horror");
 				bookRepository.create(book2);

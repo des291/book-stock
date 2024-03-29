@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.thebookoasis.bookstock.BookStockApplication;
 import com.thebookoasis.bookstock.book.Book;
-import com.thebookoasis.bookstock.book.BookController;
 import com.thebookoasis.bookstock.book.BookNotFoundException;
 import com.thebookoasis.bookstock.book.BookRepository;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,11 +27,9 @@ public class FrontEndController {
     private static final Logger log = LoggerFactory.getLogger(FrontEndController.class);
 
     private final BookRepository bookRepository;
-    private final BookController bookController;
 
-    public FrontEndController(BookRepository bookRepository, BookController bookController) {
+    public FrontEndController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.bookController = bookController;
     }
 
     @GetMapping("/")
@@ -46,6 +46,9 @@ public class FrontEndController {
     @GetMapping("/all")
     public String allBooks(Model model) {
         List<Book> books = bookRepository.findAll();
+        for (Book book : books) {
+            log.info(book.toString());
+        }
         model.addAttribute("books", books);
         return "all";
     }
@@ -69,8 +72,18 @@ public class FrontEndController {
         return "find";
     }
 
+    // @GetMapping("/all")
+    // public String allBooks(Model model) {
+    // List<Book> books = bookRepository.findAll();
+    // for (Book book : books) {
+    // log.info(book.toString());
+    // }
+    // model.addAttribute("books", books);
+    // return "all";
+    // }
+
     @GetMapping("/id")
-    public String findById(@RequestParam Integer id, Model model) {
+    public String findById(@RequestParam int id, Model model) {
         log.info("id:" + id);
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
@@ -83,11 +96,44 @@ public class FrontEndController {
     @GetMapping("/title")
     public String findByTitle(@RequestParam String title, Model model) {
         log.info("title:" + title);
-        Optional<Book> book = bookRepository.findByTitle(title);
-        if (book.isEmpty()) {
+        List<Book> books = bookRepository.findByTitle(title);
+        if (books.isEmpty()) {
             throw new BookNotFoundException();
         }
-        model.addAttribute("book", book.get());
+        model.addAttribute("books", books);
+        return "book";
+    }
+
+    @GetMapping("/author")
+    public String findByAuthor(@RequestParam String author, Model model) {
+        log.info("author:" + author);
+        List<Book> books = bookRepository.findByAuthor(author);
+        if (books.isEmpty()) {
+            throw new BookNotFoundException();
+        }
+        model.addAttribute("books", books);
+        return "book";
+    }
+
+    @GetMapping("/year")
+    public String findByPublishedYear(@RequestParam int publishedYear, Model model) {
+        log.info("publishedYear:" + publishedYear);
+        List<Book> books = bookRepository.findByPublishedYear(publishedYear);
+        if (books.isEmpty()) {
+            throw new BookNotFoundException();
+        }
+        model.addAttribute("books", books);
+        return "book";
+    }
+
+    @GetMapping("/genre")
+    public String findByGenre(@RequestParam String genre, Model model) {
+        log.info("genre:" + genre);
+        List<Book> books = bookRepository.findByGenre(genre);
+        if (books.isEmpty()) {
+            throw new BookNotFoundException();
+        }
+        model.addAttribute("books", books);
         return "book";
     }
 }
