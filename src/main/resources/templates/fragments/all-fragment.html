@@ -8,6 +8,8 @@
                 <th scope="col">Author</th>
                 <th scope="col">Year Published</th>
                 <th scope="col">Genre</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +19,13 @@
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.publishedYear}"></td>
                 <td th:text="${book.genre}"></td>
+                <td>
+                    <a type="submit" class="btn btn-primary" th:href="@{/edit(id=${book.id})}">Edit</a>
+                </td>
+                <td>
+                    <a type="submit" class="btn btn-danger" th:href="@{/delete(id=${book.id})}"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>

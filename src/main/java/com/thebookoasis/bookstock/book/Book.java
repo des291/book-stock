@@ -9,7 +9,7 @@ public class Book {
     private String title;
     @NotEmpty
     private String author;
-    // @NotNull
+    @NotNull
     private int publishedYear;
     @NotEmpty
     private String genre;

@@ -72,6 +72,16 @@ public class FrontEndController {
         return "find";
     }
 
+    @GetMapping("/edit")
+    public String editForm(@RequestParam int id, Model model) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isEmpty()) {
+            throw new BookNotFoundException();
+        }
+        model.addAttribute("book", book.get());
+        return "edit";
+    }
+
     // @GetMapping("/all")
     // public String allBooks(Model model) {
     // List<Book> books = bookRepository.findAll();
