@@ -39,6 +39,13 @@ public class BookRepository {
                 .optional();
     }
 
+    public Optional<Book> findByTitle(String title) {
+        return jdbcClient.sql("SELECT * FROM Books WHERE title = :title")
+                .param("title", title)
+                .query(Book.class)
+                .optional();
+    }
+
     // public void create(Book book) {
     // var updated = jdbcClient.sql("INSERT INTO Books(id, title, author, pub_year,
     // genre) values(?,?,?,?,?)")
