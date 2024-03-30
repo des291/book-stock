@@ -1,21 +1,23 @@
 <div class="col-sm-10">
     <h1>Create new book</h1>
-    <form action="#" th:action="@{/create}" th:object="${book}" method="post">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" th:field="*{title}" class="form-control">
+    <form action="#" th:action="@{/create}" th:object="${book}" method="post" class="form-inline">
+        <div class="form-group row mb-3">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{title}" class="form-control">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="author" class="form-label">Author</label>
-            <input type="text" th:field="*{author}" class="form-control">
+        <div class="form-group row mb-3">
+            <label for="author" class="col-sm-2 col-form-label">Author</label>
+            <div class="col-sm-10"><input type="text" th:field="*{author}" class="form-control"></div>
         </div>
-        <div class="mb-3">
-            <label for="year-published" class="form-label">Year Published</label>
-            <input type="number" th:field="*{publishedYear}" class="form-control">
+        <div class="form-group row mb-3">
+            <label for="year-published" class="col-sm-2 col-form-label">Year Published</label>
+            <div class="col-sm-10"><input type="number" th:field="*{publishedYear}" class="form-control"></div>
         </div>
-        <div class="mb-3">
-            <label for="genre" class="form-label">Genre</label>
-            <input type="text" th:field="*{genre}" class="form-control">
+        <div class="form-group row mb-3">
+            <label for="genre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10"><input type="text" th:field="*{genre}" class="form-control"></div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
