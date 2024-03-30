@@ -4,13 +4,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public class Book {
-    private int id;
+    private Integer id;
     @NotEmpty
     private String title;
     @NotEmpty
     private String author;
     @NotNull
-    private int publishedYear;
+    private Integer publishedYear;
     @NotEmpty
     private String genre;
 
@@ -18,14 +18,14 @@ public class Book {
         // this.publishedYear = 1000;
     };
 
-    public Book(String title, String author, int publishedYear, String genre) {
+    public Book(String title, String author, Integer publishedYear, String genre) {
         this.title = title;
         this.author = author;
         this.publishedYear = publishedYear;
         this.genre = genre;
     }
 
-    public Book(int id, String title, String author, int publishedYear, String genre) {
+    public Book(Integer id, String title, String author, Integer publishedYear, String genre) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -33,7 +33,7 @@ public class Book {
         this.genre = genre;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class Book {
         return author;
     }
 
-    public int getPublishedYear() {
+    public Integer getPublishedYear() {
         return publishedYear;
     }
 
@@ -61,7 +61,7 @@ public class Book {
         this.author = author;
     }
 
-    public void setPublishedYear(int publishedYear) {
+    public void setPublishedYear(Integer publishedYear) {
         this.publishedYear = publishedYear;
     }
 

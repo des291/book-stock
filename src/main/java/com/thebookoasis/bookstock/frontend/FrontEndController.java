@@ -67,7 +67,7 @@ public class FrontEndController {
     public String postBook(@ModelAttribute Book book, Model model) {
         model.addAttribute("book", book);
         bookRepository.create(book);
-        return "create-result";
+        return "redirect:/all";
     }
 
     @GetMapping("/find")
@@ -77,7 +77,7 @@ public class FrontEndController {
     }
 
     @GetMapping("/edit")
-    public String editForm(@RequestParam int id, Model model) {
+    public String editForm(@RequestParam Integer id, Model model) {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
             throw new BookNotFoundException();
@@ -87,7 +87,7 @@ public class FrontEndController {
     }
 
     @PostMapping("/edit")
-    public String updateBook(@RequestParam int id, Model model, Book updatedBook) {
+    public String updateBook(@RequestParam Integer id, Model model, Book updatedBook) {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
             throw new BookNotFoundException();
@@ -111,7 +111,7 @@ public class FrontEndController {
 
     // Using get mapping as request from button is get
     @GetMapping("/delete")
-    public String deleteBook(@RequestParam int id) {
+    public String deleteBook(@RequestParam Integer id) {
         bookRepository.delete(id);
         return "redirect:/all";
     }
@@ -127,7 +127,7 @@ public class FrontEndController {
     // }
 
     @GetMapping("/id")
-    public String findById(@RequestParam int id, Model model) {
+    public String findById(@RequestParam Integer id, Model model) {
         log.info("id:" + id);
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
@@ -163,7 +163,7 @@ public class FrontEndController {
     }
 
     @GetMapping("/year")
-    public String findByPublishedYear(@RequestParam int publishedYear, Model model) {
+    public String findByPublishedYear(@RequestParam Integer publishedYear, Model model) {
         log.info("publishedYear:" + publishedYear);
         List<Book> books = bookRepository.findByPublishedYear(publishedYear);
         if (books.isEmpty()) {
