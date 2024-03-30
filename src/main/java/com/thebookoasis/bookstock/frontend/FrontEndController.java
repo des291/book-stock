@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import com.thebookoasis.bookstock.BookStockApplication;
 import com.thebookoasis.bookstock.book.Book;
 import com.thebookoasis.bookstock.book.BookNotFoundException;
 import com.thebookoasis.bookstock.book.BookRepository;
+
+import jakarta.validation.Valid;
 
 import java.util.Arrays;
 import java.util.List;
@@ -82,6 +85,29 @@ public class FrontEndController {
         return "edit";
     }
 
+    @PostMapping("/edit")
+    public String updateBook(@RequestParam int id, Model model, Book updatedBook) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isEmpty()) {
+            throw new BookNotFoundException();
+        }
+        Book foundBook = book.get();
+        model.addAttribute("book", foundBook);
+
+        log.info(foundBook.toString());
+
+        log.info(updatedBook.toString());
+        foundBook.setGenre(updatedBook.getGenre());
+        foundBook.setPublishedYear(updatedBook.getPublishedYear());
+        foundBook.setAuthor(updatedBook.getAuthor());
+        foundBook.setTitle(updatedBook.getTitle());
+        log.info(foundBook.toString());
+
+        bookRepository.update(foundBook, id);
+
+        return "redirect:/all";
+    }
+
     // @GetMapping("/all")
     // public String allBooks(Model model) {
     // List<Book> books = bookRepository.findAll();
@@ -99,7 +125,10 @@ public class FrontEndController {
         if (book.isEmpty()) {
             throw new BookNotFoundException();
         }
-        model.addAttribute("book", book.get());
+        // converted to list so data is displayed.
+        List<Book> bookList = Arrays.asList(book.get());
+        log.info(bookList.toString());
+        model.addAttribute("books", bookList);
         return "book";
     }
 
