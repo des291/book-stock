@@ -19,20 +19,21 @@ public class BookStockApplication {
 		SpringApplication.run(BookStockApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner runner(BookRepository bookRepository) {
-		return args -> {
-			if (bookRepository.countBooks() == 0) {
-				Book book = new Book("Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction");
-				log.info("Book: " + book.getPublishedYear());
-				bookRepository.create(book);
-				Book book2 = new Book("The Shining", "Stephen King", 1980, "Horror");
-				bookRepository.create(book2);
-				Book book3 = new Book("Cash", "Johnny Cash", 2003, "Autobiography");
-				bookRepository.create(book3);
-			} else {
-				log.info("Not adding books as data already present");
-			}
-		};
-	}
+	// Uncoment below to add some books on startup
+
+	// @Bean
+	// CommandLineRunner runner(BookRepository bookRepository) {
+	// return args -> {
+	// if (bookRepository.countBooks() == 0) {
+	// bookRepository.create(new Book("Klara and the Sun", "Kazuo Ishiguro", 2021,
+	// "Science Fiction"));
+	// bookRepository.create(new Book("The Shining", "Stephen King", 1980,
+	// "Horror"));
+	// bookRepository.create(new Book("Cash", "Johnny Cash", 2003,
+	// "Autobiography"));
+	// } else {
+	// log.info("Not adding books as data already present");
+	// }
+	// };
+	// }
 }
