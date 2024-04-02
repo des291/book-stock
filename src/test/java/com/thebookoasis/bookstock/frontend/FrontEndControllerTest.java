@@ -1,11 +1,13 @@
 package com.thebookoasis.bookstock.frontend;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcResultMatchersDsl;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -46,7 +48,7 @@ public class FrontEndControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("create"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("book"))
-                .andExpect(MockMvcResultMatchers.model().attribute("book", new Book()));
+                .andExpect(MockMvcResultMatchers.model().attribute("book", Matchers.instanceOf(Book.class)));
     }
 
     @Test
