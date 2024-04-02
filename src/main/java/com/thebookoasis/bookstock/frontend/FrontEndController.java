@@ -41,23 +41,20 @@ public class FrontEndController {
     @GetMapping("/all")
     public String allBooks(Model model) {
         List<Book> books = bookRepository.findAll();
-        for (Book book : books) {
-            log.info(book.toString());
-        }
         model.addAttribute("books", books);
         return "all";
     }
 
-    @GetMapping("/create")
-    public String bookForm(Model model) {
+    @GetMapping("/add")
+    public String addBookForm(Model model) {
         model.addAttribute("book", new Book());
-        return "create";
+        return "add";
     }
 
-    @PostMapping("/create")
-    public String postBook(@ModelAttribute Book book, Model model) {
+    @PostMapping("/add")
+    public String addBook(@ModelAttribute Book book, Model model) {
         model.addAttribute("book", book);
-        bookRepository.create(book);
+        bookRepository.add(book);
         return "redirect:/all";
     }
 
@@ -85,18 +82,11 @@ public class FrontEndController {
         }
         Book foundBook = book.get();
         model.addAttribute("book", foundBook);
-
-        log.info(foundBook.toString());
-
-        log.info(updatedBook.toString());
         foundBook.setGenre(updatedBook.getGenre());
         foundBook.setPublishedYear(updatedBook.getPublishedYear());
         foundBook.setAuthor(updatedBook.getAuthor());
         foundBook.setTitle(updatedBook.getTitle());
-        log.info(foundBook.toString());
-
         bookRepository.update(foundBook, id);
-
         return "redirect:/all";
     }
 
@@ -107,33 +97,21 @@ public class FrontEndController {
         return "redirect:/all";
     }
 
-    // @GetMapping("/all")
-    // public String allBooks(Model model) {
-    // List<Book> books = bookRepository.findAll();
-    // for (Book book : books) {
-    // log.info(book.toString());
-    // }
-    // model.addAttribute("books", books);
-    // return "all";
-    // }
-
     @GetMapping("/id")
     public String findById(@RequestParam Integer id, Model model) {
-        log.info("id:" + id);
         Optional<Book> book = bookRepository.findById(id);
         if (book.isEmpty()) {
             throw new BookNotFoundException();
         }
-        // converted to list so data is displayed.
+        // converted to list so data is displayed. Should I look at creating another
+        // page.
         List<Book> bookList = Arrays.asList(book.get());
-        log.info(bookList.toString());
         model.addAttribute("books", bookList);
         return "book";
     }
 
     @GetMapping("/title")
     public String findByTitle(@RequestParam String title, Model model) {
-        log.info("title:" + title);
         List<Book> books = bookRepository.findByTitle(title);
         if (books.isEmpty()) {
             throw new BookNotFoundException();
@@ -144,7 +122,6 @@ public class FrontEndController {
 
     @GetMapping("/author")
     public String findByAuthor(@RequestParam String author, Model model) {
-        log.info("author:" + author);
         List<Book> books = bookRepository.findByAuthor(author);
         if (books.isEmpty()) {
             throw new BookNotFoundException();
@@ -155,7 +132,6 @@ public class FrontEndController {
 
     @GetMapping("/year")
     public String findByPublishedYear(@RequestParam Integer publishedYear, Model model) {
-        log.info("publishedYear:" + publishedYear);
         List<Book> books = bookRepository.findByPublishedYear(publishedYear);
         if (books.isEmpty()) {
             throw new BookNotFoundException();
@@ -166,7 +142,6 @@ public class FrontEndController {
 
     @GetMapping("/genre")
     public String findByGenre(@RequestParam String genre, Model model) {
-        log.info("genre:" + genre);
         List<Book> books = bookRepository.findByGenre(genre);
         if (books.isEmpty()) {
             throw new BookNotFoundException();

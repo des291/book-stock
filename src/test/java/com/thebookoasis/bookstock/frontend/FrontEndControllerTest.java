@@ -3,6 +3,8 @@ package com.thebookoasis.bookstock.frontend;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,6 +20,8 @@ import com.thebookoasis.bookstock.book.BookRepository;
 @WebMvcTest(FrontEndController.class)
 public class FrontEndControllerTest {
 
+    private static final Logger log = LoggerFactory.getLogger(FrontEndController.class);
+
     @Autowired
     MockMvc mvc;
 
@@ -29,9 +33,9 @@ public class FrontEndControllerTest {
 
     @BeforeEach
     void setUp() {
-        bookRepository.create(new Book("Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction"));
-        bookRepository.create(new Book("The Shining", "Stephen King", 1980, "Horror"));
-        bookRepository.create(new Book("Cash", "Johnny Cash", 2003, "Autobiography"));
+        bookRepository.add(new Book("Klara and the Sun", "Kazuo Ishiguro", 2021, "Science Fiction"));
+        bookRepository.add(new Book("The Shining", "Stephen King", 1980, "Horror"));
+        bookRepository.add(new Book("Cash", "Johnny Cash", 2003, "Autobiography"));
     }
 
     @Test
@@ -52,13 +56,20 @@ public class FrontEndControllerTest {
     }
 
     @Test
-    void testDeleteBook() {
-
+    void testDeleteBook() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/delete?id=1"))
+                .andExpect(MockMvcResultMatchers.status().is(302))
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/all"));
     }
 
     @Test
-    void testEditForm() {
-
+    void testEditForm() throws Exception {
+        log.info(bookRepository.findAll().toString());
+        mvc.perform(MockMvcRequestBuilders.get("/edit?id=3"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("edit"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("book"))
+                .andExpect(MockMvcResultMatchers.model().attribute("book", Matchers.instanceOf(Book.class)));
     }
 
     @Test

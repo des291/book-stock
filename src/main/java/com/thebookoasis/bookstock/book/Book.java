@@ -15,7 +15,6 @@ public class Book {
     private String genre;
 
     public Book() {
-        // this.publishedYear = 1000;
     };
 
     public Book(String title, String author, Integer publishedYear, String genre) {

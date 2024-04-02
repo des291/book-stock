@@ -45,7 +45,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     void create(@Valid @RequestBody Book book) {
-        bookRepository.create(book);
+        bookRepository.add(book);
     }
 
     // put
