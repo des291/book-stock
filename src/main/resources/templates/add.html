@@ -17,7 +17,36 @@
     <div class="container-fluid">
         <div class="row">
             <div th:replace="~{./fragments/sidebar-fragment}"></div>
-            <div th:replace="~{./fragments/add-fragment}"></div>
+            <div class="col-sm-10">
+                <h1>Add new book</h1>
+                <form action="#" th:action="@{/add}" th:object="${book}" method="post" class="form-inline">
+                    <div class="form-group row mb-3">
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" th:field="*{title}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="author" class="col-sm-2 col-form-label">Author</label>
+                        <div class="col-sm-10"><input type="text" th:field="*{author}" class="form-control"></div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="year-published" class="col-sm-2 col-form-label">Year Published</label>
+                        <div class="col-sm-10"><input type="number" th:field="*{publishedYear}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="genre" class="col-sm-2 col-form-label">Genre</label>
+                        <div class="col-sm-10"><input type="text" th:field="*{genre}" class="form-control"></div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <div class="col-sm-4">
+                            <a role="button" class="btn btn-secondary" href="/">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

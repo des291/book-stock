@@ -17,7 +17,10 @@
     <div class="container-fluid">
         <div class="row">
             <div th:replace="~{./fragments/sidebar-fragment}"></div>
-            <div th:replace="~{./fragments/all-fragment}"></div>
+            <div class="col-sm-10">
+                <h1>All books</h1>
+                <table th:replace="~{./fragments/book-fragment}"></table>
+            </div>
         </div>
     </div>
 </body>

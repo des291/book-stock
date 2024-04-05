@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.frontend;
+package com.thebookoasis.bookstock.book;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcResultMatchersDsl;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thebookoasis.bookstock.book.Book;
 import com.thebookoasis.bookstock.book.BookRepository;
+import com.thebookoasis.bookstock.book.BookController;
 
-@WebMvcTest(FrontEndController.class)
-public class FrontEndControllerTest {
+@WebMvcTest(BookController.class)
+public class BookControllerTest {
 
-    private static final Logger log = LoggerFactory.getLogger(FrontEndController.class);
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
     @Autowired
     MockMvc mvc;
