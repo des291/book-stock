@@ -24,6 +24,13 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
+    /**
+     * Method for GET requests on the homepage. Calculates counts for the number of
+     * books, authors and genres and adds them to the model.
+     * 
+     * @param model
+     * @return the index.html file
+     */
     @GetMapping("/")
     public String homepage(Model model) {
         int bookCount = bookRepository.countBooks();
@@ -35,6 +42,13 @@ public class BookController {
         return "index";
     }
 
+    /**
+     * Method for GET requests on '/all'. Adds a list of all books in the database
+     * to the model.
+     * 
+     * @param model
+     * @return the all.html file
+     */
     @GetMapping("/all")
     public String allBooks(Model model) {
         List<Book> books = bookRepository.findAll();
@@ -42,12 +56,25 @@ public class BookController {
         return "all";
     }
 
+    /**
+     * Method for GET requestd on '/add'. Adds a blank Book object to the model.
+     * 
+     * @param model
+     * @return the add.html file
+     */
     @GetMapping("/add")
     public String addBookForm(Model model) {
         model.addAttribute("book", new Book());
         return "add";
     }
 
+    /**
+     * Method for POST requests on '/add'. Adds the book to the database.
+     * 
+     * @param book  Book from the model. Contains user inputted values
+     * @param model
+     * @return redirects to '/all'
+     */
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book, Model model) {
         model.addAttribute("book", book);
@@ -55,12 +82,27 @@ public class BookController {
         return "redirect:/all";
     }
 
+    /**
+     * Method for GET requests on '/find'. Adds a blank Book to the model.
+     * 
+     * @param model
+     * @return the find.html file
+     */
     @GetMapping("/find")
     public String findForm(Model model) {
         model.addAttribute("book", new Book());
         return "find";
     }
 
+    /**
+     * Method for GET requests on '/edit'. Reads the ID value from the request
+     * parameter, for example /edit?id=2. If the book is found it is added to the
+     * model, otherwise a BookNotFoundException is thrown.
+     * 
+     * @param id    ID of the book to be edited. Read from request parameter.
+     * @param model
+     * @return the edit.html file
+     */
     @GetMapping("/edit")
     public String editForm(@RequestParam Integer id, Model model) {
         Optional<Book> book = bookRepository.findById(id);
@@ -71,6 +113,17 @@ public class BookController {
         return "edit";
     }
 
+    /**
+     * Method for POST requests on '/edit'. Reads the ID value from the request
+     * parameter, for example /edit?id=2. If the book is found it is added to the
+     * model, otherwise a BookNotFoundException is thrown. Updates the book in the
+     * database with the matching ID based on user inputs.
+     * 
+     * @param id          ID of the book to be edited. Read from request parameter.
+     * @param model
+     * @param updatedBook Book object contining values from user inputs.
+     * @return redirects to '/all'
+     */
     @PostMapping("/edit")
     public String editBook(@RequestParam Integer id, Model model, Book updatedBook) {
         Optional<Book> book = bookRepository.findById(id);
@@ -87,13 +140,35 @@ public class BookController {
         return "redirect:/all";
     }
 
-    // Using get mapping as request from button is get
+    /**
+     * Method for GET requests on '/delete'. Reads the ID value from the request
+     * parameter, for example /delete?id=2. If the book is found it is deleted from
+     * the database, otherwise a BookNotFoundException is thrown.
+     * 
+     * Uses a @GetMapping since the request from the button is a GET request.
+     * 
+     * @param id ID of the book to be deleted. Read from request parameter.
+     * @return redirects to '/all'
+     */
     @GetMapping("/delete")
     public String deleteBook(@RequestParam Integer id) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isEmpty()) {
+            throw new BookNotFoundException();
+        }
         bookRepository.delete(id);
         return "redirect:/all";
     }
 
+    /**
+     * Method for GET requests on '/id'. Reads the ID value from the request
+     * parameter, for example /id?id=2. If the book is found it is added to the
+     * model, otherwise a BookNotFoundException is thrown.
+     * 
+     * @param id    ID of the book to be found. Read from request parameter.
+     * @param model
+     * @return the book.html file
+     */
     @GetMapping("/id")
     public String findById(@RequestParam Integer id, Model model) {
         Optional<Book> book = bookRepository.findById(id);
@@ -107,6 +182,15 @@ public class BookController {
         return "book";
     }
 
+    /**
+     * Method for GET requests on '/title'. Reads the Title value from the request
+     * parameter, for example /title?title=Klara+and+the+Sun. If the book is found
+     * it is added to the model, otherwise a BookNotFoundException is thrown.
+     * 
+     * @param title Title of the book to be found. Read from request parameter.
+     * @param model
+     * @return the book.html file
+     */
     @GetMapping("/title")
     public String findByTitle(@RequestParam String title, Model model) {
         List<Book> books = bookRepository.findByTitle(title);
@@ -117,6 +201,16 @@ public class BookController {
         return "book";
     }
 
+    /**
+     * Method for GET requests on '/author'. Reads the Author value from the request
+     * parameter, for example /author?author=Kazuo+Ishiguro. If the book
+     * is found it is added to the model, otherwise a BookNotFoundException is
+     * thrown.
+     * 
+     * @param author Author of the book to be found. Read from request parameter.
+     * @param model
+     * @return the book.html file
+     */
     @GetMapping("/author")
     public String findByAuthor(@RequestParam String author, Model model) {
         List<Book> books = bookRepository.findByAuthor(author);
@@ -127,6 +221,17 @@ public class BookController {
         return "book";
     }
 
+    /**
+     * Method for GET requests on '/year'. Reads the Year value from the request
+     * parameter, for example /year?year=2021. If the book
+     * is found it is added to the model, otherwise a BookNotFoundException is
+     * thrown.
+     * 
+     * @param publishedYear Year of publication of the book to be found. Read from
+     *                      request parameter.
+     * @param model
+     * @return the book.html file
+     */
     @GetMapping("/year")
     public String findByPublishedYear(@RequestParam Integer publishedYear, Model model) {
         List<Book> books = bookRepository.findByPublishedYear(publishedYear);
@@ -137,6 +242,16 @@ public class BookController {
         return "book";
     }
 
+    /**
+     * Method for GET requests on '/genre'. Reads the Genre value from the request
+     * parameter, for example /genre?genre=Science+Fiction. If the book
+     * is found it is added to the model, otherwise a BookNotFoundException is
+     * thrown.
+     * 
+     * @param genre Genre of the book to be found. Read from request parameter.
+     * @param model
+     * @return the book.html file
+     */
     @GetMapping("/genre")
     public String findByGenre(@RequestParam String genre, Model model) {
         List<Book> books = bookRepository.findByGenre(genre);
