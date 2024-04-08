@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.book;
+package com.thebookoasis.bookshelfmanager.book;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
+
+import com.thebookoasis.bookshelfmanager.book.Book;
+import com.thebookoasis.bookshelfmanager.book.BookRepository;
 
 @JdbcTest
 @Import(BookRepository.class)

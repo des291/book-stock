@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.book;
+package com.thebookoasis.bookshelfmanager.book;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

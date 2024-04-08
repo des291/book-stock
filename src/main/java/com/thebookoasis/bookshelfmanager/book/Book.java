@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.book;
+package com.thebookoasis.bookshelfmanager.book;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

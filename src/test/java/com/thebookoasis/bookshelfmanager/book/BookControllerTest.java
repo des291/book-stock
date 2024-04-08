@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.book;
+package com.thebookoasis.bookshelfmanager.book;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +13,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thebookoasis.bookshelfmanager.book.Book;
+import com.thebookoasis.bookshelfmanager.book.BookController;
+import com.thebookoasis.bookshelfmanager.book.BookRepository;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTest {

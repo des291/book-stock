@@ -1,10 +1,10 @@
-package com.thebookoasis.bookstock;
+package com.thebookoasis.bookshelfmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookStockApplicationTests {
+class BookshelfManagerApplicationTests {
 
 	@Test
 	void contextLoads() {

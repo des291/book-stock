@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock;
+package com.thebookoasis.bookshelfmanager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,16 +7,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.thebookoasis.bookstock.book.Book;
-import com.thebookoasis.bookstock.book.BookRepository;
+import com.thebookoasis.bookshelfmanager.book.Book;
+import com.thebookoasis.bookshelfmanager.book.BookRepository;
 
 @SpringBootApplication
-public class BookStockApplication {
+public class BookshelfManagerApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(BookStockApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(BookshelfManagerApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookStockApplication.class, args);
+		SpringApplication.run(BookshelfManagerApplication.class, args);
 	}
 
 	// Uncoment below to add some books on startup

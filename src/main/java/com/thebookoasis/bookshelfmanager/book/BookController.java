@@ -1,4 +1,4 @@
-package com.thebookoasis.bookstock.book;
+package com.thebookoasis.bookshelfmanager.book;
 
 import java.util.Arrays;
 import java.util.List;
