@@ -9,6 +9,13 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+/**
+ * This class provides functionality to interact with books in a database. It
+ * allows users to add, edit, delete and find books as well as calulate counts
+ * for different criteria.
+ * 
+ * @author Des Grainger
+ */
 @Repository
 public class BookRepository {
 

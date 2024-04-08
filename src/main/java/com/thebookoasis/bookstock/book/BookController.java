@@ -1,19 +1,31 @@
 package com.thebookoasis.bookstock.book;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * 
+ * This class serves as the controller for managing the flow of data related to
+ * books in the application.
+ * 
+ * It handles various HTTP requests to perform operations such as displaying
+ * book details, adding, editing, and deleting books.
+ * 
+ * The controller interacts with the BookRepository to retrieve and update book
+ * information in the database.
+ * 
+ * @author Des Grainger
+ */
 @Controller
 public class BookController {
     private static final Logger log = LoggerFactory.getLogger(BookController.class);

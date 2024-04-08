@@ -13,9 +13,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thebookoasis.bookstock.book.Book;
-import com.thebookoasis.bookstock.book.BookRepository;
-import com.thebookoasis.bookstock.book.BookController;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTest {
