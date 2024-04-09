@@ -13,9 +13,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 
-import com.thebookoasis.bookshelfmanager.book.Book;
-import com.thebookoasis.bookshelfmanager.book.BookRepository;
-
 @JdbcTest
 @Import(BookRepository.class)
 @AutoConfigureTestDatabase

@@ -57,7 +57,7 @@ public class BookRepository {
          * @return Result returned as a list.
          */
         public List<Book> findByTitle(String title) {
-                return jdbcClient.sql("SELECT * FROM Books WHERE title = :title")
+                return jdbcClient.sql("SELECT * FROM Books WHERE UPPER(title) = UPPER(:title)")
                                 .param("title", title)
                                 .query(Book.class)
                                 .list();
@@ -70,7 +70,7 @@ public class BookRepository {
          * @return Result returned as a list.
          */
         public List<Book> findByAuthor(String author) {
-                return jdbcClient.sql("SELECT * FROM Books WHERE author = :author")
+                return jdbcClient.sql("SELECT * FROM Books WHERE UPPER(author) = UPPER(:author)")
                                 .param("author", author)
                                 .query(Book.class)
                                 .list();
@@ -83,7 +83,7 @@ public class BookRepository {
          * @return Result returned as a list.
          */
         public List<Book> findByGenre(String genre) {
-                return jdbcClient.sql("SELECT * FROM Books WHERE genre = :genre")
+                return jdbcClient.sql("SELECT * FROM Books WHERE UPPER(genre) = UPPER(:genre)")
                                 .param("genre", genre)
                                 .query(Book.class)
                                 .list();
